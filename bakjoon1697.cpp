@@ -2,8 +2,8 @@
 #include <queue>
 #include <vector>
 using namespace std;
-int line[100000];
-int visited[100000] = {0,};
+int line[100001];
+int visited[100001] = {0,};
 int n, k;
 int time;
 
