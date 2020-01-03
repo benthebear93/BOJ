@@ -69,7 +69,7 @@ int main() {
             }
          }
       } // section ?
-      
+      ekaks,
       if (l_cnt>=2) {
          cout  <<  year << endl;
          break;
