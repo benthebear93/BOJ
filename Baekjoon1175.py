@@ -17,11 +17,11 @@ def bfs():
     queue.append(0, 0)
     while(queue):
         (x, y) = queue.popleft()
-
+        temp = (x, y)
         for i in range(4):
             nx = x+dx[i]
             ny = y+dy[i]
-            if temp_x == dx[i] and temp_y == dy[i]
+
             #can't not go out the class
             if nx < 0 or nx > M or ny <0 or ny >N:
                 continue
@@ -30,6 +30,14 @@ def bfs():
             if map[nx][ny] =='#':
                 continue
             # change direction
+            if map[nx][ny] == '.':
+                map[nx][ny] = map[x][y] + 1
+                queue.append((nx, ny))
+
+            if map[nx][ny] == 'C':
+                map[nx][ny] = map[x][y] + 1
+                distance +=1
+
             if map[nx][ny] ==
             temp_x = dx[i]
             temp_y = dy[i]
