@@ -1,6 +1,5 @@
 import numpy as np
 from collections import deque
-M, N = map(int, input().split())  # map input #n row, m column
 map = []
 visited = []
 dx = [0, 0, 1, -1]
@@ -8,21 +7,29 @@ dy = [1, -1, 0, 0]
 temp_x = 0
 temp_y = 0
 st_pos = [0 , 0]
-c_pos = [0, 0]
-if N > 50 and M > 50:
-    print("M , N has to be smaller & equal then 50")
-else:
-    for a in (0, N):
-        map.append(list(input()))
+c_pos = [0, 0, 0, 0]
 
-for i in (0, N):
-    for j in (0, M):
-        if map[i][j] == 'S':
-            st_pos[0] = i
-            st_pos[1] = j
-        elif map[i][j] == 'C':
-            c_pos[0] = i
-            c_pos[1] = j
+
+def map_init():
+    m, n = map(int, input().split())  # map input #n row, m column
+    c_check = 0
+    if n > 50 and m > 50:
+        print("M , N has to be smaller & equal then 50")
+
+    else:
+        for a in (0, n):
+            map.append(list(input()))
+
+    for i in (0, n):
+        for j in (0, m):
+            if map[i][j] == 'S': #store Start point
+                st_pos[0] = i
+                st_pos[1] = j
+            elif map[i][j] == 'C': #store Custom point
+                c_check += 1
+                if c_check == 2:
+                    c_pos[2] = i
+                    c_pos[3] = j
 
 def bfs():
     queue = deque()
