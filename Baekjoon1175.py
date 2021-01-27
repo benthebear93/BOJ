@@ -1,6 +1,6 @@
 import numpy as np
 from collections import deque
-map = []
+class_map = []
 visited = []
 dx = [0, 0, 1, -1]
 dy = [1, -1, 0, 0]
@@ -10,53 +10,41 @@ st_pos = [0 , 0]
 c_pos = [0, 0, 0, 0]
 
 
-def map_init():
-    m, n = map(int, input().split())  # map input #n row, m column
-    c_check = 0
-    if n > 50 and m > 50:
-        print("M , N has to be smaller & equal then 50")
 
-    else:
-        for a in (0, n):
-            map.append(list(input()))
+n, m = map(int, input().split())  # map input #n row, m column
+line =[]
+for i in range(n):
+	line.append(list(input()))
 
-    for i in (0, n):
-        for j in (0, m):
-            if map[i][j] == 'S': #store Start point
-                st_pos[0] = i
-                st_pos[1] = j
-            elif map[i][j] == 'C': #store Custom point
-                c_check += 1
-                if c_check == 2:
-                    c_pos[2] = i
-                    c_pos[3] = j
+def bfs(q, case, visited): #bfs for the distance to C from Robot
+	while(q):
+		row, col, to = q.popleft()
+		if line[row][col] =="C": #arrived to C?
+			case.append([visited[row][col][to],row, col, to])
+		for k in range(4): #check 4 direction
+			if k == to: #pass the same direction
+				continue
+			temp_x = row + dx[k]
+			temp_y = col + dy[k]
+			if 0<= temp_x < N and 0 <=temp_y <M and line[temp_x][temp_y] !="#" and visited[temp_x][temp_y][k]==0:
+				visited[temp_x][temp_y][k] = visited[row][col][to] + 1
+				q.append([temp_x],[temp_y], k)
 
-def bfs():
-    queue = deque()
-    queue.append(0, 0)
-    while(queue):
-        (x, y) = queue.popleft()
-        temp = (x, y)
-        for i in range(4):
-            nx = x+dx[i]
-            ny = y+dy[i]
+def dfs(dist, s_r, s_c, to, cnt):
+	global ans
+	if ans<=dist:
+		return 
 
-            #can't not go out the class
-            if nx < 0 or nx > M or ny <0 or ny >N:
-                continue
+	if cnt ==2: #delivered both?
+		if dist<ans: 
+			ans=dist
+		return
+	visited =[[[0, 0, 0, 0] for j in range(m)] for i in range(n)]
+	visited[s_r][s_c][to] = dist
+	q = deque([s_r,s_c, to])
+	case=[]
+	bfs(case,q,visited)
 
-            #wall check
-            if map[nx][ny] =='#':
-                continue
-            # change direction
-            if map[nx][ny] == '.':
-                map[nx][ny] = map[x][y] + 1
-                queue.append((nx, ny))
+	for n_dist, n_r, n_c, n_to in case:
+		L[n_r][n_c]
 
-            if map[nx][ny] == 'C':
-                map[nx][ny] = map[x][y] + 1
-                distance +=1
-
-            if map[nx][ny] ==
-            temp_x = dx[i]
-            temp_y = dy[i]
