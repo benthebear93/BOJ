@@ -23,7 +23,7 @@ while True:
 	#print(n)
 	if n < k:
 		break
-	result +=1
-	n//=k
+	result +=1 #2 5 8
+	n//=k # n = 8 
 result+=(n-1)
 print("ans:", result)
