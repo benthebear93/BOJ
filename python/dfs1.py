@@ -3,7 +3,7 @@ import numpy as np
 # N : row(4), M :column(5)
 n, m = map(int, input().split())
 
-graph
+graph = []
 for i in range(n):
 	graph.append(list(map(int, input())))
 
